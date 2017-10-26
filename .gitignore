@@ -1,6 +1,7 @@
 # custome
 .idea/
 config.py
+accessKeys.csv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

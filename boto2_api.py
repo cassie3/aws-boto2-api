@@ -4,7 +4,6 @@ from config import aws_access_key_id, aws_secret_access_key, \
     web_server_ip, benchmarking_ip, key_pair
 
 
-
 class BotoApi(object):
     key_pair_dir = './saved_key_pairs'
 
