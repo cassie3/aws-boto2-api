@@ -1,6 +1,6 @@
 import boto.ec2
 
-from config import aws_access_key_id, aws_secret_access_key, \
+from config import IAM_AWS_access_key_id, IAM_AWS_secret_access_key, \
     web_server_instance_id, benchmarking_instance_id, \
     web_server_ip, benchmarking_ip, key_pair
 
@@ -9,17 +9,17 @@ class BotoApi(object):
     key_pair_dir = './saved_key_pairs'
 
     # Initiate the connection
-    def __init__(self, aws_access_key_id, aws_secret_access_key):
-        self.aws_access_key_id = aws_access_key_id
-        self.aws_secret_access_key = aws_secret_access_key
+    def __init__(self, IAM_AWS_access_key_id, IAM_AWS_secret_access_key):
+        self.IAM_AWS_access_key_id = IAM_AWS_access_key_id
+        self.IAM_AWS_secret_access_key = IAM_AWS_secret_access_key
         self.is_connect = False
         self.conn = False
 
     # Build the connection to AWS
     def connect(self, region_name):
         conn = boto.ec2.connect_to_region(region_name=region_name,
-                                          aws_access_key_id=aws_access_key_id,
-                                          aws_secret_access_key=aws_secret_access_key
+                                          aws_access_key_id=IAM_AWS_access_key_id,
+                                          aws_secret_access_key=IAM_AWS_secret_access_key
                                           )
         self.is_connect = True
         self.conn = conn
@@ -76,7 +76,8 @@ class BotoApi(object):
         ins = self.conn.run_instances(image_id=image_id,
                                        key_name=key_pair.name,
                                        instance_type=instance_type,
-                                       security_groups=[group_name])
+                                       security_groups=[group_name]
+                                      )
 
         print ins
 
@@ -132,15 +133,18 @@ class BotoApi(object):
 
 if __name__ == "__main__":
     # code to run a instance
-    # ins = BotoApi(aws_access_key_id, aws_secret_access_key)
-    # ins.connect('us-east-2')
-    # ins.creat_key_pair(key_pair)
-    # ins.create_security_group('csc326-group31', 'have a try')
-    # ins.run_instances(key_pair, 'csc326-group31', 'ami-c5062ba0', 't2.micro')
+    ins = BotoApi(IAM_AWS_access_key_id, IAM_AWS_secret_access_key)
+    ins.connect(region_name = 'us-east-2')
+    # ins.security_group_authorize('yinhaoti group')
+    ins.creat_key_pair('wynnn')
+    # ins.create_security_group("yinhaoti group", 'first use')
+    # ins.run_instances(key_pair, 'yinhaoti group', 'ami-c5062ba0', 't2.micro')
 
-    from utils import initiDir
-    initiDir('./saved_key_pairs')
-
+    # conn = boto.ec2.connect_to_region("us-west-2")
+    # conn.run_instances(image_id=image_id,
+    #                    key_name=key_pair.name,
+    #                    instance_type=instance_type,
+    #                    security_groups=[group_name])
 
 
     # Below are some using examples

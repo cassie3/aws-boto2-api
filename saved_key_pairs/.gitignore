@@ -1,4 +1,4 @@
-# 忽略所有文件
+# Ignore all files in this dir
 *
-# 除了这个文件
+# except this file
 !.gitignore

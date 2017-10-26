@@ -2,4 +2,5 @@
 This is a super-class of boto2 lib, which integrates the basic features in boto2
 
 
-All private information is inside the config.py.
+All private information is inside the config.py
+You need to built it yourself
